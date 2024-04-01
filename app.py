@@ -1,6 +1,6 @@
 
 from flask import Flask
-from PyPI import psycopg2-binary
+import psycopg2
 
 app = Flask(__name__)
 
