@@ -36,7 +36,7 @@ def inserting():
     conn = psycopg2.connect('postgres://lab10_sql_user:w9IrSpCQMvqvMCZMF5HVckOnhSbGC4mv@dpg-co5h25uv3ddc73911mh0-a/lab10_sql')
     cur = conn.cursor()
     cur.execute('''
-        INSERT INTO Basketball (First, Last, City, Name, Number Values)
+        INSERT INTO Basketball (First, Last, City, Name, Number)
         VALUES ('Jayson', 'Tatum', 'Boston', 'Celtics', 0),
         ('Stephen', 'Curry', 'Golden State', 'Warriors', 30),
         ('Nikola', 'Jokic', 'Denver', 'Nuggets', 15),
@@ -63,5 +63,12 @@ def selecting():
     response_string+='</table>'
     return response_string
 
-app.route('/db_drop')
+@app.route('/db_drop')
+def dropping():
+    conn = psycopg2.connect('postgres://lab10_sql_user:w9IrSpCQMvqvMCZMF5HVckOnhSbGC4mv@dpg-co5h25uv3ddc73911mh0-a/lab10_sql')
+    cur = conn.cursor()
+    cur.execute('DROP TABLE Basketball')
+    conn.commit()
+    conn.close()
+    return 'Basketball table dropped!'
 
